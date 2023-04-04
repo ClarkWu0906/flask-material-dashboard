@@ -7,7 +7,16 @@ from apps.home import blueprint
 from flask import render_template, request
 from flask_login import login_required
 from jinja2 import TemplateNotFound
-
+##讀進資料
+import pandas as pd
+df = pd.read_csv(r"C:\Users\Ericw\Dropbox\Desktop-win10\gitfirst\Webproject3th\高規格訂單明細.xlsx - 1G-POE.csv")
+df = list(df.iloc(0))
+df = df[1:]
+##
+@blueprint.route('/tables.html')
+def table():
+  print(df)
+  return render_template('home/tables.html', df = df)
 
 @blueprint.route('/index')
 @login_required
